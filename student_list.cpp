@@ -14,6 +14,24 @@ struct SinhVien{
     float gpa;
 };
 
+void standard_w(string &s){
+    s[0] = toupper(s[0]);
+    for(int i=1; i<s.length(); i++){
+        s[i] = tolower(s[i]);
+    }
+}
+
+void standard(string &s){
+    stringstream ss(s);
+    s.clear();
+    string word;
+    while(ss>>word){
+        standard_w(word);
+        s.append(word);
+        s+=" ";
+    }
+}
+
 void input_date(date &time){
     char slash;
     cin>>time.day>>slash>>time.month>>slash>>time.year;
@@ -31,6 +49,7 @@ void nhap(SinhVien ds[], int n){
         ss<< "B20DCCN" << setfill('0') << setw(3) << i+1;
         ds[i].id = ss.str();
         getline(cin>>ws,ds[i].name);
+        standard(ds[i].name);
         getline(cin>>ws,ds[i].croom);
         input_date(ds[i].birth);
         cin>>ds[i].gpa;
